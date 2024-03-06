@@ -8,49 +8,38 @@
 </head>
 <body>
     <header>
-        <div id="head_1">
-            <h1>My Concert</h1>
+        <div class="head_1">
+            <h1>TropicTIX</h1>
+            <h6>Where the Beat Meets the Beach</h6>
         </div>
-        <form>
-            <div id="searchbarID">
-                <input type="text" id="searchvalue" placeholder="cari Konser"> <button id="searchbutton"  type="submit">Search</button>
-            </div>
+        <form id="searchbar">
+            <input type="text" id="searchvalue" placeholder="Search Concerts"> 
+            <button id="searchbutton" type="submit">Search</button>
         </form>
     </header>
 
     <main>
-        
-        <!-- <div id="hasilsearch">
-            <ul id="daftarhasil"></ul> -->
-
-        </div>
-        <div>
-            <table border="1">
-                <tr>
-                    <td>
-                        Konser 1
-                    </td>
-                    <td>
-                        Konser 2
-                    </td>
-                    <td>
-                        kons 3
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        kons4
-                    </td>
-                    <td>
-                        kons5
-                    </td>
-                    <td>
-                        kond6   
-                    </td>
-                </tr>
-
-            </table>
-
+        <hr>
+        <h2>Tonton Konser Paling Seru bersama TropicTIX</h2>
+        <div id="tabkonser">
+            <div class="concert">
+                <img src="gambar/home/kygo.jpg">
+                <label class="labelkonser">OCT 29</label>
+                <label class="labelkonser2">Palm Tree Festival! Bersama Kygo</label>
+                <button class="detailkonser">Read More</button>
+            </div>
+            <div class="concert">
+                <img src="gambar/home/bruno.jpeg">
+                <label class="labelkonser">JUN 12</label>
+                <label class="labelkonser2">Stok Terbatas! Beli Sekarang</label>
+                <button class="detailkonser">Read More</button>
+            </div>
+            <div class="concert">
+                <img src="gambar/home/avamx.jpg">
+                <label class="labelkonser">NOV 11</label>
+                <label class="labelkonser2">Diskon 20%! Dapatkan Sekarang</label>
+                <button class="detailkonser">Read More</button>
+            </div>
         </div>
     </main>
 </body>
