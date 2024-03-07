@@ -79,14 +79,18 @@ table{
   margin: 0 auto;
   padding-bottom: 30px;
 }
-
+table fieldset{
+  border-color:maroon;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px grey;
+}
 td img{
   display: flex;
   max-height: 250px;
   border-radius: 10px;
 }
 td{
-  padding: 30px;
+  padding: 25px;
 }
 
 .labelkonser {
