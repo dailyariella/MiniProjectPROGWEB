@@ -1,27 +1,7 @@
-/* Your combined CSS */
-
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: "Proxima Nova",Arial, Helvetica, sans-serif, Arial;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-header {
-  background-color: #000;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
-}
+/*
 
 .head_1 h1 {
   font-size: 36px;
-  margin: 0;
 }
 .head_1 h6{
   font-size: medium;
@@ -32,10 +12,6 @@ header {
 
 }
 
-#searchbar {
-  margin-top: 20px;
-  margin-right: -50%;
-}
 
 #searchvalue {
   padding: 10px;
@@ -53,41 +29,24 @@ header {
 
 main {  
   background-color: #f8f8f8;
-  padding: 20px;
   text-align: center;
 }
-
-#tabkonser {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
+table{
+  margin: 0 auto;
 }
-
-#tabkonser .concert {
-  text-align: left;
-}
-
-#tabkonser img {
+td img{
+  display: block  ;
   max-height: 200px;
-  max-width: 250;
-  border: 5px solid #fff;
-  border-radius: 10px;
+  padding: 10px;
 }
 
 .labelkonser {
-  display: block;
-  margin-top: auto;
-  margin-left: 7px;
   font-size: 15px;
   color: grey;
 }
 
 .labelkonser2{
-  display: block;
-  margin-top:10px;
-  margin-left: 7px;
-  margin-right: 15px;
+
   font-size:110%;
   font-weight:bold;
   color: #000;
@@ -96,6 +55,115 @@ main {
 .detailkonser{
   margin-top: 10%;
   margin-left: 7px;
+  border: solid maroon 2px;
+  background-color: #fff;
+  color: maroon;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.detailkonser:hover{
+  background-color: maroon;
+  color: #fff;
+}
+
+
+ */
+
+
+html {
+  font-family: "Proxima Nova",Arial, Helvetica, sans-serif, Arial;
+}
+
+
+header {
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+}
+.head_1 h1{
+  padding-top: 40px;
+  font-size: 36px;
+  letter-spacing: 5px;
+}
+
+.head_1 h6{
+  font-size: 16px;
+  font-family: "roboto";
+  font-style: italic;
+  letter-spacing: 5px;
+  margin-top:5px;
+
+}
+
+#searchbar {
+  margin-top: 20px;
+  margin-right: -50%;
+  padding-bottom: 30px;
+}
+
+#searchvalue {
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+}
+
+#searchbutton {
+  padding: 10px 20px;
+  background-color: #fff;
+  border: none;
+  border-radius: 20px;
+}
+#searchbutton:hover{
+  background-color: rgb(204, 196, 196);
+}
+
+main{
+  padding-top:10px;
+  text-align: center;
+  margin: 0 auto ;
+}
+
+table{
+  margin: 0 auto;
+}
+
+td img{
+  display: flex;
+  max-height: 250px;
+  border-radius: 10px;
+}
+td{
+  padding: 30px;
+}
+
+.labelkonser {
+  display: block;
+  text-align: left;
+  padding-left: 5%;
+  font-size: 15px;
+  color: grey;
+}
+.labelkonser span{
+  font-style: italic;
+  font-weight: bold;
+  color: lightcoral;
+  padding-left: 70px;
+}
+
+.labelkonser2{
+  display: block;
+  text-align: left;
+  font-size:20px;
+  padding-left: 5%; 
+  font-weight:bold;
+}
+
+.detailkonser{
+  display: block;
+  margin-top: 15px;
+  margin-left :5%; 
   border: solid maroon 2px;
   background-color: #fff;
   color: maroon;
