@@ -13,6 +13,9 @@ header {
   background-color: #000;
   color: #fff;
   text-align: center;
+  border-bottom-left-radius: 5PX;
+  border-bottom-right-radius: 5PX;
+  box-shadow: 0 2px 5px grey;
 }
 
 footer{
@@ -32,11 +35,18 @@ footer div{
 }
 
 
-.head_1 h1{
-  padding-top: 40px;
-  font-size: 36px;
-  letter-spacing: 5px;
-}
+  .head_1 h1{
+    text-shadow: 4px 4px 1px  #A52A2A;
+    padding-top: 40px;
+    font-size: 36px;
+    letter-spacing: 5px;
+    transition: 0.2s;
+  }
+  .head_1 h1:hover{
+    color: #A52A2A;
+    text-shadow: 4px 4px 1px #fff;
+    transition: 0.2s;
+  }
 
 .head_1 h6{
   font-size: 16px;
@@ -48,16 +58,17 @@ footer div{
 }
 
 #searchbar {
-  margin-top: 20px;
-  margin-right: -50%;
-  padding-bottom: 30px;
+  padding: 20PX 0 30PX 500px;
 }
 
 #searchvalue {
   padding: 10px;
-  border: none;
   border-radius: 20px;
+  background-color: white;
+  border: none;
+  outline: none;
 }
+
 
 #searchbutton {
   padding: 10px 20px;
@@ -66,7 +77,8 @@ footer div{
   border-radius: 20px;
 }
 #searchbutton:hover{
-  background-color: rgb(204, 196, 196);
+  background-color: #A52A2A;
+  color: white;
 }
 
 main{
@@ -80,9 +92,9 @@ table{
   padding-bottom: 30px;
 }
 table fieldset{
-  border-color:maroon;
+  border-color:#A52A2A;
   border-radius: 5px;
-  box-shadow: 3px 3px 5px grey;
+  box-shadow: 3px 3px 5px #A52A2A;
 }
 td img{
   display: flex;
@@ -119,15 +131,18 @@ td{
   display: block;
   margin-top: 15px;
   margin-left :5%; 
-  border: solid maroon 2px;
+  border: solid #A52A2A 2px;
   background-color: #fff;
-  color: maroon;
+  color:#A52A2A;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .detailkonser:hover{
-  background-color: maroon;
+  background-color: #A52A2A;
   color: #fff;
+}
+a{
+  text-decoration: none;
 }
