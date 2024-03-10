@@ -137,11 +137,13 @@ td{
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .detailkonser:hover{
   background-color: #A52A2A;
   color: #fff;
+  transition: 0.2s;
 }
 a{
   text-decoration: none;
