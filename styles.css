@@ -35,14 +35,14 @@ footer div{
 }
 
 
-  .head_1 h1{
+.head_1 h1{
     text-shadow: 4px 4px 1px  #A52A2A;
     padding-top: 40px;
     font-size: 36px;
     letter-spacing: 5px;
     transition: 0.2s;
   }
-  .head_1 h1:hover{
+.head_1 h1:hover{
     color: #A52A2A;
     text-shadow: 4px 4px 1px #fff;
     transition: 0.2s;
