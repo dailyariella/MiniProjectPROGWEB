@@ -81,6 +81,19 @@ footer div{
   color: white;
 }
 
+.fab{
+  font-size: 35px;
+  padding-left: 10px;
+  color: #fff;
+  text-shadow: 3px 3px 3px #A52A2A;
+  text-align: center;
+}
+
+.fab:hover{
+  color: #A52A2A;
+  text-shadow: 2px 2px 10px #fff;
+}
+
 main{
   padding-top:10px;
   text-align: center;
@@ -147,17 +160,4 @@ td{
 }
 a{
   text-decoration: none;
-}
-
-.fab{
-  font-size: 35px;
-  padding-left: 10px;
-  color: #fff;
-  text-shadow: 3px 3px 3px #A52A2A;
-  text-align: center;
-}
-
-.fab:hover{
-  color: #A52A2A;
-  text-shadow: 2px 2px 10px #fff;
 }

@@ -102,28 +102,27 @@ html {
 
   /*BATAS HEADER DAN FOOTER*/
 
-  main{
+main{
     padding-top: 10px;
     padding-bottom: 30px;
     margin: 0 auto;
   }
 
-  table{
+#table_1{
     margin: 0 auto;
-    padding-bottom: 30px;
   }
 
-  td{
-    padding: 30px;
+#table_1 td{
+    padding: 60px;
+    vertical-align: top;
   }
+
   td img{
     max-height: 350px;
     border-radius: 10px;
-    box-shadow: 3px 3px 5px #A52A2A;
+    box-shadow: 3px 3px 7px #A52A2A;
   }
-#detailkonser{
-    padding-bottom: 30px;
-}
+
 
 .judulkonser{
     font-weight: bolder;
@@ -139,7 +138,7 @@ html {
     color: grey;
 }
 .tglkonser #wktkonser{
-    padding-left: 25px;
+    padding-left: 27px;
 }
 .hargatiket{
     font-style: italic;
@@ -156,27 +155,27 @@ html {
 
 #desKonser p{
     text-indent: 20px;
-    margin: 0 20% 0 20%;
+    margin: 0 10% 0 10%;
     text-align: justify;
     font-size: large;
-    padding-bottom:30px;
+    padding-bottom:40px;
 }
+
 #table_2{
-    padding-top: 10px;
-    width: 65%;
-    margin: 0 auto;
+  margin: 0 10% 0 10%;
+    width: 80%;
     text-align: justify;
 }
 #table_2 h3{
     color: #A52A2A;
     font-size: 25px;
     font-weight: bolder;
-    border-right: 2px #000;
 }
 
 #table_2 td {
     width: 50%;
     text-align: left;
+    padding-left: 50px;
     padding-right:50px;
     vertical-align: top;
 }
@@ -193,9 +192,7 @@ html {
  ol li{
     font-weight: bold;
  }
-
 #poinlist{
     font-weight: bold;
     font-size: large;
 }
-
