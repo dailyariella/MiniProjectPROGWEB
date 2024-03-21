@@ -58,7 +58,8 @@ footer div{
 }
 
 #searchbar {
-  padding: 20PX 0 30PX 500px;
+  padding: 20px 0 30px;
+  text-align: center; /* Mengatur posisi horizontal menjadi center */
 }
 
 #searchvalue {
@@ -67,6 +68,9 @@ footer div{
   background-color: white;
   border: none;
   outline: none;
+  width: 80%; /* Mengatur lebar input sesuai kebutuhan */
+  max-width: 300px; /* Batasan lebar maksimum untuk input */
+  margin-bottom: 10px; /* Spasi antara input dan tombol */
 }
 
 
