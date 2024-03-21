@@ -99,6 +99,7 @@ main{
   text-align: center;
   margin: 0 auto ;
 }
+/* 
 
 table{
   margin: 0 auto;
@@ -116,7 +117,7 @@ td img{
 }
 td{
   padding: 25px;
-}
+} */
 
 .labelkonser {
   display: block;
@@ -161,3 +162,24 @@ td{
 a{
   text-decoration: none;
 }
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* atau justify-content: space-around; */
+  margin: 10px;
+}
+
+
+.konserdetail{
+  flex-basis: calc(33.33% - 20px); /* Sesuaikan dengan kebutuhan */
+  padding: 10px;
+
+}
+
+.konserdetail img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 7px;
+}
+
