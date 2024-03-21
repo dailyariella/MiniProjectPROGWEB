@@ -59,7 +59,7 @@ footer div{
 
 #searchbar {
   padding: 20px 0 30px;
-  text-align: center; /* Mengatur posisi horizontal menjadi center */
+  text-align: center; 
 }
 
 #searchvalue {
@@ -68,9 +68,9 @@ footer div{
   background-color: white;
   border: none;
   outline: none;
-  width: 80%; /* Mengatur lebar input sesuai kebutuhan */
-  max-width: 300px; /* Batasan lebar maksimum untuk input */
-  margin-bottom: 10px; /* Spasi antara input dan tombol */
+  width: 80%; 
+  max-width: 300px; 
+  margin-bottom: 10px;
 }
 
 
@@ -103,25 +103,6 @@ main{
   text-align: center;
   margin: 0 auto ;
 }
-/* 
-
-table{
-  margin: 0 auto;
-  padding-bottom: 30px;
-}
-table fieldset{
-  border-color:#A52A2A;
-  border-radius: 5px;
-  box-shadow: 3px 3px 5px #A52A2A;
-}
-td img{
-  display: flex;
-  max-height: 250px;
-  border-radius: 10px;
-}
-td{
-  padding: 25px;
-} */
 
 .labelkonser {
   display: block;
@@ -163,9 +144,7 @@ td{
   color: #fff;
   transition: 0.2s;
 }
-a{
-  text-decoration: none;
-}
+
 
 .container {
   display: flex;
@@ -187,3 +166,6 @@ a{
   border-radius: 7px;
 }
 
+a{
+  text-decoration: none;
+}
