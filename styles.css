@@ -149,13 +149,13 @@ main{
 .container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around; /* atau justify-content: space-around; */
+  justify-content: space-around; 
   margin: 10px;
 }
 
 
 .konserdetail{
-  flex-basis: calc(33.33% - 20px); /* Sesuaikan dengan kebutuhan */
+  flex-basis: calc(33.33% - 20px);
   padding: 10px;
 
 }
