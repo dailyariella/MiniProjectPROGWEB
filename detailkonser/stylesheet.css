@@ -2,9 +2,20 @@ html {
     font-family: "Proxima Nova",Arial, Helvetica, sans-serif, Arial;
   }
 
-
+  hr{
+    margin-top: 5%;
+    border: none;
+    height: 2px;
+    background-color: #A52A2A;
+    margin: 20px;
+  }
   header {
-    background-color: #000;
+    background-image: url("../gambar/bgheader.jpg");
+    background-size: cover;
+    background-position: center;
+    padding-top: 100px;
+    padding-bottom: 75px;
+    position: relative;
     color: #fff;
     text-align: center;
     border-bottom-left-radius: 5PX;
@@ -32,7 +43,7 @@ html {
       text-shadow: 4px 4px 1px  #A52A2A;
       color: #fff;
       padding-top: 40px;
-      font-size: 36px;
+      font-size: 50px;
       letter-spacing: 5px;
       transition: 0.2s;
     }
@@ -108,13 +119,10 @@ html {
 
   /*BATAS HEADER DAN FOOTER*/
 
-  main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 10px;
-    padding-bottom: 30px;
-    margin: 0 auto;
+  main{
+    text-align: center;
+    margin: 0 auto ;
+    margin-bottom: 10%;
   }
   
   #table_1 {
@@ -194,14 +202,13 @@ html {
   #table_2 td:first-child {
     border-right: 3px solid #A52A2A;
   }
-  
+
   ul li,
   ol li {
     padding-left: 10px;
     padding-bottom: 10px;
     text-align: justify;
   }
-  
   ol li {
     font-weight: bold;
   }
@@ -210,50 +217,82 @@ html {
     font-weight: bold;
     font-size: large;
   }
-  
-
-  .ticket {
-    border-collapse: collapse;
-  left: 100px;
-  width: 50%;
-  margin: 50px;
-}
-.ticket td{
-  border: none;
-  padding: 10px;
-  width: 60%;
+.main-container {
+    display: flex;
+    flex-direction: row;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-bottom: 5px;
 }
 
-.ticket img{
-  border:solid 2px #A52A2A;
-  width: 100%;
-  
+.tickets-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }
 
-.ticket td:nth-child(2) h2 {
+.ticket {
+    width: 200px;
+    margin: 0 10px;
+}
+
+.stock {
+    margin-top: 5px;
+}
+
+.seatplan p{
   color: #A52A2A;
-  font-weight: bolder;
-
+  font-size: larger;
+  font-weight: bold;
+}
+.seatplan img{
+  max-width: 40%;
+  height: auto;
+  box-shadow: 2px 2px 3px gray;
+  transition: 0.2s;
+  
+}
+.seatplan img:hover{
+  transform: scale(1.6);
+  transition: 0.3s;
 }
 
-.ticket td:nth-child(2) p{
-  color: lightcoral;
-  font-weight: bolder;
+.beli-button{
+  margin-bottom: 70px;
+  padding: 20px 40px;
+  border: solid #A52A2A 2px;
+  background-color: #fff;
+  color:#A52A2A;
+  border-radius: 5px;
+  transition: 0.2s;
+  box-shadow: 2px 2px 1px gray;
+}
+.beli-button:hover{
+  background-color: #A52A2A;
+  color: #fff;
+  box-shadow: none;
+}
+.deskripsi-konser{
+  font-size: large;
+  margin-bottom: 5%;
+  margin-left: 150px;
+  margin-right: 150px;
+  text-align: justify;
+  text-indent: 2em;
+}
+
+.ticket h2{
+  text-decoration: underline;
+  color: #A52A2A;}
+.ticket p+p{
+  font-size: larger;
+  color: coral;
   font-style: italic;
+  font-weight: bold;
 }
-
-.ticket td:nth-child(2) #stok
-{
-  font-style: normal;
-  color: gray;
+.stock{
   font-weight: bolder;
+  font-size: large;
 }
-
-.ticket tr{
-  background-color: lightgray;
-  transition: 1s ease;
-}
-.ticket tr:hover{
-  transform:scale(1.3);
-}
-
