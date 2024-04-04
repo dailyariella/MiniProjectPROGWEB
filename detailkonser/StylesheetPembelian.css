@@ -147,9 +147,9 @@ a{text-decoration: none;}
 }
 
 .ticket-details p {
-  color: black;
+  color: white;
   font-weight: bold;
-  font-size: larger;
+  font-size: small;
   margin: 5px 0;
 }
 .ticket-details label{
@@ -161,11 +161,74 @@ a{text-decoration: none;}
 }
 
 table td{
-  text-align: center;  
   vertical-align: text-bottom;
   
 }
+main p{
+  color: #A52A2A;
+  font-weight: bolder;
+  font-size: xx-large;
+  text-align: center;
+}
+  /* bc */
+  ul.breadcrumb li {
+    color: black;
+    display: inline;
+    font-weight: bold;
+    font-size: 15px;
+  }
+
+  ul.breadcrumb li a {
+    color: #A52A2A  ;
+  }
+  ul.breadcrumb li a:hover {
+    color: #01447e;
+    text-decoration: underline;
+  }
+
+  ul.breadcrumb li+li:before {
+    padding: 1px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #A52A2A;
+    content: "/\00a0";
+  }
+/* kembali */
+.btn-kembali{
+  top: 0 !important;
+  left: 0 ;
+  border: none;
+  color: #A52A2A;
+  background-color: white;
+  border: solid 2px #A52A2A;
+  border-radius: 5px;
+  padding: 5px;
+  transition: 0.6s;
+}
+
+.btn-kembali:hover{
+color: #fff;
+background-color: #A52A2A;
+transition: 0.6s;
+}
+.btn-kembali img{
+width: 20px;
+}
+fieldset legend{
+  text-align: center;
+  border: 2px solid  #A52A2A;
+  color: white;
+  background-color: #A52A2A;
+}
 fieldset{
+  width: 90%;
+  border: 2px solid #A52A2A;
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+fieldset+fieldset{width: 25%;
   border: 2px solid #A52A2A;
   border-radius: 5px;
   margin-top: 20px;
@@ -173,7 +236,7 @@ fieldset{
   margin-right: auto;
 }
 
-
+input[type="number"],
 input[type="text"],
 input[type="tel"],
 input[type="email"],
@@ -181,18 +244,20 @@ input[type="submit"],
 input[type="reset"]{
   border: 2px solid #A52A2A;
   border-radius: 5px;
-  padding: 5px;
+  padding: 10px;
 }
 
-input[type="submit"], input[type="reset"]{
+input[type="submit"],input[type="reset"]{
+  border: none ;
   padding: 10px;
   background-color: #A52A2A;
   color: white;
   cursor: pointer;  
+  transition: 0.6s;
+
 }
 
 input[type="submit"]:hover , input[type="reset"]:hover{
   background-color: maroon;
+  transition: 0.6s;
 }
-
-

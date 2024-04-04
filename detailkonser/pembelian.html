@@ -4,11 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <titlePpembelian< /title>
+    <title>Pembelian</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
         <link rel="stylesheet" href="StylesheetPembelian.css">
 </head>
-
 <body>
     <header>
         <div class="head_1">
@@ -22,8 +21,22 @@
             <button id="searchbutton" type="submit">Cari</button>
         </form>
     </header>
+    <div class="bcrumb">
+        <ul class="breadcrumb">
+            <li><a href="../TropicTIX.html">Home</a></li>
+            <li><a href="Kygo-KidsInLove.html">Kygo-KidsInLove</a></li>
+            <li>Pemesanan</li>
+
+          </ul>
+    </div>
     <hr>
+    <a href="Kygo-KidsInLove.html"><button class="btn-kembali">&lt Kembali</button></a>
+
     <main>
+
+        <p class="pemesanan">Menu Pemesanan</p>
+        <fieldset>
+            <legend>Pilih Tiket Kamu</legend>
         <div class="ticket">
             <div class="ticket-item">
                 <img src="../gambar/bpass.jpg" alt="">
@@ -55,57 +68,57 @@
                     <label for="platinum">Pilih Platinum</label>
                 </div>
             </div>
+        
+        </fieldset>
             <fieldset>
-            <form id="formbeli">
-                <table>
-                    <tr>
-                        <td>
-                            <label>Nama:</label>
+                <form id="formbeli">
+                    <table>
+                        <tr>
+                            <td>
+                                <label>Jumlah Tiket :</label>
+                            </td>
+                            <td>
+                                <input type="number" min="1" max="10" value="1" required><br><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Nama:</label>
+                            </td>
+                            <td>
+                                <input type="text" required><br><br>
 
-                        </td>
-                        <td>
-                            <input type="text" required><br><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Nomor Telepon:</label>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Nomor Telepon:</label>
-
-                        </td>
-                        <td>
-                            <input type="tel" pattern="[0-9]{10,12}" required><br><br>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Email:</label>
-
-                        </td>
-                        <td>
-                            <input type="email" required><br><br>
-                        </td>
-                    <tr>
-                        <td>
-                            <input type="reset" value="Batal">
-                        </td>
-                        <td>
-                            <input type="submit" value="Beli Tiket">
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
-                <!-- <label>Nama:</label>
-                <input type="text" required><br><br>
-
-                <label>Nomor Telepon:</label>
-                <input type="tel" maxlength="12" required><br><br>
-
-                <label>Email:</label>
-                <input type="email" required><br><br>
-
-                <input type="submit" value="Beli Tiket"> -->
+                            </td>
+                            <td>
+                                <input type="tel" pattern="[0-9]{10,12}" required><br><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Email:</label>
+                            </td>
+                            <td>
+                                <input type="email" required><br><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="reset" value="Batal">
+                            </td>
+                            <td>
+                                <input type="submit" value="Beli Tiket">
+                            </td>
+                        </tr>
+                    </table>
             </form>
+        </fieldset>
+
 
     </main>
     </main>
