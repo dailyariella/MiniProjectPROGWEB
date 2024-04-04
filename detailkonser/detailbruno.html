@@ -1,83 +1,45 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kygo - Kids In Love</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    <link rel="stylesheet" href="stylesheet.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daftar Tiket</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <div class="head_1">
-            <a href="../TropicTIX.html"><h1>TropicTIX</h1></a>
-            <h6>Where the Beat Meets the Beach</h6>
-        </div>
-        <form id="searchbar">
-            <input type="text" id="searchvalue" placeholder="Cari Konser"> 
-            <button id="searchbutton" type="submit">Cari</button>
-        </form>
-    </header>
 
-    <main>
-        <hr>
-        <table id="table_1">
-            <td><img src="../gambar/detail/kygoKIL.jpg" alt=""></td>
-            <td>
-                <div id="detailkonser">
-                <p class="judulkonser">Kygo - Kids In Love</p>
-                <p class="tglkonser">27 April 2024 <span id="wktkonser">10:30 PM </span></p>
-                <p class="tempatkonser">XS Night Club, Las Vegas Convention Center</p>
-                <p class="hargatiket">Rp 325.000 ~ Rp 525.000</p>
-                </div>
-            </td>
-        </table>
+<div class="ticket-list">
+  <div class="ticket">
+    <input type="radio" id="ticket1" name="ticket" class="ticket-radio">
+    <label for="ticket1" class="ticket-label">
+      <img src="../gambar/bpass.jpg" alt="Tiket A">
+      <h3>Tiket A</h3>
+      <p>Harga: $50</p>
+      <p>Stok: 100</p>
+      <p>Kelas: Kelas 1</p>
+    </label>
+  </div>
+  <div class="ticket">
+    <input type="radio" id="ticket2" name="ticket" class="ticket-radio">
+    <label for="ticket2" class="ticket-label">
+      <img src="ticket2.jpg" alt="Tiket B">
+      <h3>Tiket B</h3>
+      <p>Harga: $40</p>
+      <p>Stok: 80</p>
+      <p>Kelas: Kelas 2</p>
+    </label>
+  </div>
+  <div class="ticket">
+    <input type="radio" id="ticket3" name="ticket" class="ticket-radio">
+    <label for="ticket3" class="ticket-label">
+      <img src="ticket3.jpg" alt="Tiket C">
+      <h3>Tiket C</h3>
+      <p>Harga: $30</p>
+      <p>Stok: 60</p>
+      <p>Kelas: Kelas 3</p>
+    </label>
+  </div>
+</div>
 
-        <div id="desKonser">
-            <p>
-                Bergabunglah dengan kami untuk pengalaman musik yang luar biasa di mana energi positif bertemu dengan melodi yang memukau. Kygo, si penyelenggara pesta musik elektronik yang penuh semangat, akan membawa Anda dalam perjalanan musik yang tak terlupakan. Di konser ini, Kygo akan membawakan lagu-lagu dari album terbarunya, "Kids in Love", yang akan menambah kesan magis dan keceriaan acara ini. Jangan lewatkan momen keindahan musik yang akan menciptakan kenangan abadi. Segera dapatkan tiket Anda dan hadiri konser spektakuler ini!            </p>
-        </div>
-
-        <table id="table_2">
-            <tr>
-                <td>
-                    <h3>Aturan Konser</h3>
-                    <ul>
-                        <li><span id="poinlist">Usia:</span> Acara ini terbuka untuk semua usia, namun, pengunjung di bawah usia 16 tahun harus didampingi oleh orang dewasa.</li>
-                        <li><span id="poinlist">Waktu Acara:</span> Pintu akan dibuka pukul 09.00 PM dan konser akan dimulai pukul 10.30. Pastikan datang tepat waktu untuk menikmati setiap detiknya.</li>
-                        <li><span id="poinlist">Pakaian:</span> Pakailah pakaian yang nyaman dan sesuai dengan tema "Kids in Love". Rasa kenyamanan dan gaya bersama-sama menciptakan atmosfer yang luar biasa.</li>
-                        <li><span id="poinlist">Peralatan Pribadi:</span> Dilarang membawa kamera profesional, rekaman audio, atau alat perekam video lainnya kecuali izin khusus telah diberikan oleh penyelenggara.</li>
-                        <li><span id="poinlist">Keamanan:</span> Pengamanan akan hadir untuk memastikan keselamatan semua pengunjung. Harap patuhi petunjuk dan aturan keamanan yang diberikan.</li>
-                    </ul>
-                </td>
-                <td>
-                    <h3>Daftar Lagu Yang di Bawakan</h3>
-                    <ol>
-                        <li>Kids in Love</li>
-                        <li>Never Let You Go</li>
-                        <li>Sunrise</li>
-                        <li>Riding Shotgun</li>
-                        <li>Stranger Things</li>
-                        <li>With You</li>
-                        <li>Permanent</li>
-                        <li>I See You</li>
-                        <li>Stargazing</li>
-                        <li>It Ain't Me</li>
-                    </ol>
-                </td>
-            </tr>
-        </table>
-        <hr>
-
-    </main>
-
-    <footer>
-        <p>&copy; 2024 TropicTIX. All rights reserved.</p>
-        <div class="sosmeds">
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-        </div>
-    </footer>
 </body>
 </html>

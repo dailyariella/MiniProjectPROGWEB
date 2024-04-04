@@ -1,5 +1,6 @@
 html {
   font-family: "Proxima Nova",Arial, Helvetica, sans-serif, Arial;
+  background-color: aliceblue;
 }
 
 hr{
@@ -118,3 +119,80 @@ footer div{
 a{text-decoration: none;}
 
 /*BATAS HEADER DAN FOOTER*/
+
+
+.ticket {
+  margin: 0 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.ticket-item {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.ticket-details {
+  margin-top: -4px;
+  padding: 10px;
+  background-color: #A52A2A;
+  border-bottom-right-radius:10px;
+  border-bottom-left-radius: 10px;
+}
+
+.ticket-details h2 {
+  color: white;
+  margin-top: 0;
+}
+
+.ticket-details p {
+  color: black;
+  font-weight: bold;
+  font-size: larger;
+  margin: 5px 0;
+}
+.ticket-details label{
+  color: white;
+}
+
+.ticket-item img{
+  max-width: 400px;
+}
+
+table td{
+  text-align: center;  
+  vertical-align: text-bottom;
+  
+}
+fieldset{
+  border: 2px solid #A52A2A;
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="submit"],
+input[type="reset"]{
+  border: 2px solid #A52A2A;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+input[type="submit"], input[type="reset"]{
+  padding: 10px;
+  background-color: #A52A2A;
+  color: white;
+  cursor: pointer;  
+}
+
+input[type="submit"]:hover , input[type="reset"]:hover{
+  background-color: maroon;
+}
+
+
