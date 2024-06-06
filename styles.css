@@ -184,3 +184,78 @@ main h2{
 a{
   text-decoration: none;
 }
+
+
+/* punya login */
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.login-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #A52A2A;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-form button:hover {
+  background-color: maroon;
+}
+
+.login-form p {
+  text-align: center;
+}
+
+.user_action {
+  position: absolute;
+  right: 25px;
+} 
+
+#loginlogout {
+  margin-top: 15px;
+  margin-left :5%; 
+  border: solid #A52A2A 2px;
+  background-color: #fff;
+  color:#A52A2A;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#loginlogout:hover{
+  background-color: #A52A2A;
+  color: #fff;
+  transition: 0.2s;
+}
