@@ -40,6 +40,7 @@ if (isset($_SESSION['loggedin']) === true) {
         </div>
     </div>
     <hr>
+    <a href="TropicTIX.php"><button class="btn-kembali">&lt Kembali</button></a>
     <main>
         <h2>Hasil Pencarian untuk "<span class="tptix"><?php echo htmlspecialchars($_GET['searchValue']); ?></span>"</h2>
         <div class="container">

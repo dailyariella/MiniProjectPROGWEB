@@ -5,6 +5,11 @@ if (isset($_SESSION['loggedin']) === false) {
     header("Location: login.php");
     exit;
 }
+if (isset($_SESSION['loggedin']) === true) {
+    $login_logout_link = '<a href="logout.php"><button id="loginlogout">Logout</button></a>';
+} else {
+    $login_logout_link = '<a href="login.php"><button id="loginlogout">Login</button></a>';
+}
 
 include_once "koneksi.php";
 
@@ -23,6 +28,21 @@ $result = $koneksi->query($sql);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="StylesheetPembelian.css">
 </head>
+<div class="floating-menu">
+        <div class="menu-content">
+            <div class="logo">
+                <h1>TropicTIX</h1>
+            </div>
+            <div id="floating-right" class="user_action">
+                <form id="searchbar2" action="searchpage.php" method="GET">
+                    <input type="text" id="searchvalue2" name="searchValue" placeholder="Cari Konser"> 
+                    <button id="searchbutton2" type="submit">Cari</button>
+                </form>
+                <?php echo $login_logout_link ?>
+            </div>
+        </div>
+    </div>
+
 
 <body>
     <header>
@@ -55,7 +75,6 @@ $result = $koneksi->query($sql);
             <li>
                 <a href="pembelian.php?id=<?php echo $id_Konser; ?>">Pembelian</a>
             </li>
-
         </ul>
     </div>
     <hr>
@@ -71,12 +90,12 @@ $result = $koneksi->query($sql);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         echo "<div class='ticket-item' onclick='selectTicket(" . $row['id_tiket'] . ")'>";
-                        echo "<img src='gambar/tiket/" . $row['image_path'] . "' alt='' onclick='selectTicket(" . $row['id_tiket'] . ")'>";
+                        echo "<img src='gambar/tiket/" . $row['image_path'] . "' alt=''>";
                         echo "<div class='ticket-details'>";
                         echo "<h2>" . $row['jenis_tiket'] . "</h2>";
                         echo "<p class='stok'>Stok Tersedia: " . $row['stock'] . "</p>";
                         echo "<p>Rp " . $row['harga'] . "</p>";
-                        echo "<input type='radio' name='ticket' id='" . $row['id_tiket'] . "' value='" . $row['id_tiket'] . "'>";
+                        echo "<input type='radio' name='ticket' id='" . $row['id_tiket'] . "' value='" . $row['id_tiket'] . "' data-harga='" . $row['harga'] . "'>";
                         echo "</div>";
                         echo "</div>";
                     }
@@ -94,7 +113,7 @@ $result = $koneksi->query($sql);
                             <label>Jumlah Tiket :</label>
                         </td>
                         <td>
-                            <input type="number" min="1" max="10" value="1" required><br><br>
+                            <input type="number" id="jumlahTiket" min="1" max="10" value="1" required disabled><br><br>
                         </td>
                     </tr>
                     <tr>
@@ -102,17 +121,15 @@ $result = $koneksi->query($sql);
                             <label>Nama:</label>
                         </td>
                         <td>
-                            <input type="text" required><br><br>
-
+                            <input type="text" required disabled><br><br>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label>Nomor Telepon:</label>
-
                         </td>
                         <td>
-                            <input type="tel" pattern="[0-9]{10,12}" required><br><br>
+                            <input type="tel" pattern="[0-9]{10,12}" required disabled><br><br>
                         </td>
                     </tr>
                     <tr>
@@ -120,19 +137,23 @@ $result = $koneksi->query($sql);
                             <label>Email:</label>
                         </td>
                         <td>
-                            <input type="email" required><br><br>
+                            <input type="email" required disabled><br><br>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="reset" value="Batal">
+                            <input type="reset" value="Batal" disabled>
                         </td>
                         <td>
-                            <input type="submit" value="Beli Tiket">
+                            <input type="submit" value="Beli Tiket" disabled>
                         </td>
                     </tr>
                 </table>
             </form>
+        </fieldset>
+        <fieldset>
+            <legend>Total Harga</legend>
+            <div id="totalHarga">Rp 0</div>
         </fieldset>
     </main>
     <hr>
@@ -148,9 +169,59 @@ $result = $koneksi->query($sql);
 
     <script>
         function selectTicket(ticketId) {
-            document.getElementById(ticketId).checked = true;
-        }
-    </script>
-</body>
+            // Mendapatkan elemen radio button yang sesuai
+            var radioButton = document.getElementById(ticketId);
+            radioButton.checked = true;
 
+            // Mendapatkan semua elemen radio button
+            var radioButtons = document.querySelectorAll("input[name='ticket']");
+            var selectedPrice = 0;
+
+            // Menghapus kelas 'selected' dari semua elemen
+            var ticketItems = document.querySelectorAll('.ticket-item');
+            ticketItems.forEach(function(item) {
+                item.classList.remove('selected');
+            });
+
+            // Menambahkan kelas 'selected' ke elemen yang dipilih dan mendapatkan harga tiket yang dipilih
+            radioButtons.forEach(function(radioButton) {
+                if (radioButton.checked) {
+                    selectedPrice = parseInt(radioButton.getAttribute('data-harga'));
+                    radioButton.closest('.ticket-item').classList.add('selected');
+                }
+            });
+
+            // Mendapatkan jumlah tiket
+            var jumlahTiket = document.getElementById('jumlahTiket').value;
+
+            // Menghitung total harga
+            var totalHarga = selectedPrice * jumlahTiket;
+
+            // Menampilkan total harga
+            document.getElementById('totalHarga').innerText = 'Rp ' + totalHarga.toLocaleString('id-ID');
+
+            var formInputs = document.querySelectorAll('#formbeli input');
+            formInputs.forEach(function(input) {
+                input.disabled = false;
+            });
+        }
+        document.getElementById('jumlahTiket').addEventListener('input', function() {
+            selectTicket(document.querySelector("input[name='ticket']:checked").id);
+        });
+
+        var radioButtons = document.querySelectorAll("input[name='ticket']");
+        radioButtons.forEach(function(radioButton) {
+            radioButton.addEventListener('change', function() {
+                selectTicket(radioButton.id);
+            });
+        });
+        var ticketItems = document.querySelectorAll('.ticket-item');
+        ticketItems.forEach(function(item) {
+            item.addEventListener('click', function() {
+                selectTicket(item.querySelector("input[name='ticket']").id);
+            });
+        });
+    </script>
+    <script src="menuatas.js"></script>
+</body>
 </html>

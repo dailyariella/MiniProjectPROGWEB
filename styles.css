@@ -7,7 +7,7 @@ hr{
   margin-top: 20px;
   border: none;
   height: 2px;
-  background-color: #000;
+  background-color: #A52A2A;
   margin: 20px;
 }
 header {
@@ -328,4 +328,23 @@ a{
   background-color: #A52A2A;
   color: #fff;
   transition: 0.2s;
+}
+
+
+.btn-kembali{
+  top: 0;
+  left: 0;
+  border: none;
+  color: #A52A2A;
+  background-color: white;
+  border: solid 2px #A52A2A;
+  border-radius: 5px;
+  padding: 5px;
+  transition: 0.6s;
+}
+
+.btn-kembali:hover{
+color: #fff;
+background-color: #A52A2A;
+transition: 0.6s;
 }
