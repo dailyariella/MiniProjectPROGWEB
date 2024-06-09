@@ -1,3 +1,18 @@
+<?php
+session_start(); // Memulai session
+
+if (isset($_SESSION['loggedin']) === false) {
+    header("Location: login.php");
+    exit;
+}
+
+include_once "koneksi.php";
+
+$id_Konser = $_GET['id'];
+$sql = "SELECT * FROM tiket WHERE id_konser = $id_Konser";
+$result = $koneksi->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,13 +20,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pembelian</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-        <link rel="stylesheet" href="StylesheetPembelian.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="StylesheetPembelian.css">
 </head>
+
 <body>
     <header>
         <div class="head_1">
-            <a href="../TropicTIX.html">
+            <a href="TropicTIX.php">
                 <h1>TropicTIX</h1>
             </a>
             <h6>Where the Beat Meets the Beach</h6>
@@ -23,99 +39,99 @@
     </header>
     <div class="bcrumb">
         <ul class="breadcrumb">
-            <li><a href="TropicTIX.php">Home</a></li>
-            <li><a href="detailkonser.php">Kygo-KidsInLove</a></li>
-            <li>Pemesanan</li>
+            <li>
+                <a href="TropicTIX.php">Home</a>
+            </li>
+            <li>
+                <a href="detailkonser.php?id=<?php echo $id_Konser; ?>">
+                    <?php
+                    $sql = "SELECT judul_konser FROM konser WHERE id_konser = $id_Konser";
+                    $result1 = $koneksi->query($sql);
+                    $row = $result1->fetch_assoc();
+                    echo $row['judul_konser'];
+                    ?>
+                </a>
+            </li>
+            <li>
+                <a href="pembelian.php?id=<?php echo $id_Konser; ?>">Pembelian</a>
+            </li>
 
-          </ul>
+        </ul>
     </div>
     <hr>
-    <a href="detailkonser.php"><button class="btn-kembali">&lt Kembali</button></a>
-
+    <?php
+    echo "<a href='detailkonser.php?id=" . $id_Konser . "'><button class='btn-kembali'>&lt Kembali</button></a>";
+    ?>
     <main>
-
         <p class="pemesanan">Menu Pemesanan</p>
         <fieldset>
             <legend>Pilih Tiket Kamu</legend>
-        <div class="ticket">
-            <div class="ticket-item">
-                <img src="gambar/bpass.jpg" alt="">
-                <div class="ticket-details">
-                    <h2>Bronze Ticket</h2>
-                    <p class="stok">Stok Tersedia: 100</p>
-                    <p>Rp 325.000</p>
-                    <input type="radio" name="ticket" id="bronze" value="bronze">
-                    <label for="bronze">Pilih Bronze</label>
-                </div>
+            <div class="ticket">
+                <?php
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<div class='ticket-item' onclick='selectTicket(" . $row['id_tiket'] . ")'>";
+                        echo "<img src='gambar/tiket/" . $row['image_path'] . "' alt='' onclick='selectTicket(" . $row['id_tiket'] . ")'>";
+                        echo "<div class='ticket-details'>";
+                        echo "<h2>" . $row['jenis_tiket'] . "</h2>";
+                        echo "<p class='stok'>Stok Tersedia: " . $row['stock'] . "</p>";
+                        echo "<p>Rp " . $row['harga'] . "</p>";
+                        echo "<input type='radio' name='ticket' id='" . $row['id_tiket'] . "' value='" . $row['id_tiket'] . "'>";
+                        echo "</div>";
+                        echo "</div>";
+                    }
+                } else {
+                    echo "Tidak ada tiket tersedia.";
+                }
+                ?>
             </div>
-            <div class="ticket-item">
-                <img src="gambar/gpass.jpg" alt="">
-                <div class="ticket-details">
-                    <h2>Gold Ticket</h2>
-                    <p class="stok">Stok Tersedia: 50</p>
-                    <p>Rp 425.000</p>
-                    <input type="radio" name="ticket" id="gold" value="gold">
-                    <label for="gold">Pilih Gold</label>
-                </div>
-            </div>
-            <div class="ticket-item">
-                <img src="gambar/ppass.jpg" alt="">
-                <div class="ticket-details">
-                    <h2>Platinum Ticket</h2>
-                    <p class="stok">Stok Tersedia: 20</p>
-                    <p>Rp 525.000</p>
-                    <input type="radio" name="ticket" id="platinum" value="platinum">
-                    <label for="platinum">Pilih Platinum</label>
-                </div>
-            </div>
-        
         </fieldset>
-            <fieldset>
-                <form id="formbeli" action="pemesanansukses.html">
-                    <table>
-                        <tr>
-                            <td>
-                                <label>Jumlah Tiket :</label>
-                            </td>
-                            <td>
-                                <input type="number" min="1" max="10" value="1" required><br><br>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>Nama:</label>
-                            </td>
-                            <td>
-                                <input type="text" required><br><br>
+        <fieldset>
+            <form id="formbeli" action="pemesanansukses.html">
+                <table>
+                    <tr>
+                        <td>
+                            <label>Jumlah Tiket :</label>
+                        </td>
+                        <td>
+                            <input type="number" min="1" max="10" value="1" required><br><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Nama:</label>
+                        </td>
+                        <td>
+                            <input type="text" required><br><br>
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>Nomor Telepon:</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Nomor Telepon:</label>
 
-                            </td>
-                            <td>
-                                <input type="tel" pattern="[0-9]{10,12}" required><br><br>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>Email:</label>
-                            </td>
-                            <td>
-                                <input type="email" required><br><br>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="reset" value="Batal">
-                            </td>
-                            <td>
-                                <input type="submit" value="Beli Tiket">
-                            </td>
-                        </tr>
-                    </table>
+                        </td>
+                        <td>
+                            <input type="tel" pattern="[0-9]{10,12}" required><br><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Email:</label>
+                        </td>
+                        <td>
+                            <input type="email" required><br><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="reset" value="Batal">
+                        </td>
+                        <td>
+                            <input type="submit" value="Beli Tiket">
+                        </td>
+                    </tr>
+                </table>
             </form>
         </fieldset>
     </main>
@@ -129,6 +145,12 @@
             <a href="#"><i class="fab fa-youtube"></i></a>
         </div>
     </footer>
+
+    <script>
+        function selectTicket(ticketId) {
+            document.getElementById(ticketId).checked = true;
+        }
+    </script>
 </body>
 
 </html>

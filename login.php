@@ -2,20 +2,25 @@
 include_once "koneksi.php";
 session_start();
 
+$error_message = '';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM user WHERE id_user = '$username' AND password = '$password'";
-    $result = $koneksi->query($sql);
+    $sql = "SELECT * FROM user WHERE id_user = ? AND password = ?";
+    $stmt = $koneksi->prepare($sql);
+    $stmt->bind_param("ss", $username, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        session_start();
         $_SESSION['loggedin'] = true;
         $_SESSION['username'] = $username;
         header("location: tropictix.php");
+        exit;
     } else {
-        $error_message = "Username atau Password salah.";
+        $error_message = "Username atau password salah";
     }
 }
 ?>
@@ -45,10 +50,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="error-message"><?php echo $error_message; ?></div>
                 <?php endif; ?>
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Masukan Username" required>
+                <input type="text" id="username" name="username" placeholder="Username" required>
                 
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Masukan Password" required>
+                <input type="password" id="password" name="password" placeholder="Password" required>
                 
                 <button type="submit">Login</button>
             </form>

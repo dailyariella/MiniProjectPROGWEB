@@ -3,7 +3,7 @@ session_start();
 include_once "koneksi.php";
 
 if (isset($_SESSION['loggedin']) === true) {
-    $login_logout_link = '<a href="logout.php"><button id="loginlogout">Logout</button></a>';
+    $login_logout_link = '<a href="login.php"><button id="loginlogout">Logout</button></a>';
 } else {
     $login_logout_link = '<a href="login.php"><button id="loginlogout">Login</button></a>';
 }

@@ -1,3 +1,19 @@
+<?php
+session_start();
+include_once "koneksi.php";
+
+if (isset($_SESSION['loggedin']) === true) {
+    $login_logout_link = '<a href="logout.php"><button id="loginlogout">Logout</button></a>';
+} else {
+    $login_logout_link = '<a href="login.php"><button id="loginlogout">Login</button></a>';
+}
+
+include 'koneksi.php';
+$id_konser = $_GET['id'];
+
+$sql = "SELECT * FROM konser WHERE id_Konser = $id_konser";
+$result = $koneksi->query($sql);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,9 +24,23 @@
     <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
+<div class="floating-menu">
+        <div class="menu-content">
+            <div class="logo">
+                <h1>TropicTIX</h1>
+            </div>
+            <div id="floating-right" class="user_action">
+                <form id="searchbar2" action="searchpage.php" method="GET">
+                    <input type="text" id="searchvalue2" name="searchValue" placeholder="Cari Konser"> 
+                    <button id="searchbutton2" type="submit">Cari</button>
+                </form>
+                <?php echo $login_logout_link ?>
+            </div>
+        </div>
+    </div>
 <header>
     <div class="head_1">
-        <a href="../TropicTIX.php"><h1>TropicTIX</h1></a>
+        <a href="TropicTIX.php"><h1>TropicTIX</h1></a>
         <h6>Where the Beat Meets the Beach</h6>
     </div>
     <form id="searchbar">
@@ -21,19 +51,25 @@
 <div class="bcrumb">
     <ul class="breadcrumb">
         <li><a href="TropicTIX.php">Home</a></li>
-        <li>Kygo-kids in love</li>
+        <?php
+        $sql = "SELECT judul_konser FROM konser WHERE id_konser = $id_konser";
+        $result1 = $koneksi->query($sql);
+        $row = $result1->fetch_assoc();
+        echo "<li><a href='detailkonser.php?id=" . $id_konser . "'>" . $row['judul_konser'] . "</a></li>";
+        ?>
     </ul>
 </div>
 <hr>
 <a href="TropicTIX.php"><button class="btn-kembali">&lt Kembali</button></a>
+<!-- echo "<a href='detailkonser.'><button class='btn-kembali'>&lt Kembali</button></a>"; -->
 
 <main>
     <?php
-    include 'koneksi.php';
-    $id_konser = $_GET['id'];
+    // include 'koneksi.php';
+    // $id_konser = $_GET['id'];
 
-    $sql = "SELECT * FROM konser WHERE id_Konser = $id_konser";
-    $result = $koneksi->query($sql);
+    // $sql = "SELECT * FROM konser WHERE id_Konser = $id_konser";
+    // $result = $koneksi->query($sql);
 
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -65,7 +101,7 @@
             if ($result_tickets->num_rows > 0) {
                 while ($ticket = $result_tickets->fetch_assoc()) {
                     echo "<div class='ticket'>";
-                    echo "<h2>" . htmlspecialchars($ticket['jenis_tiket']) . " Ticket</h2>";
+                    echo "<h2>" . htmlspecialchars($ticket['jenis_tiket']) . "</h2>";
                     echo "<p class='stock'>Stok Tersedia: " . htmlspecialchars($ticket['stock']) . "</p>";
                     echo "<p>Rp " . htmlspecialchars($ticket['harga']) . "</p>";
                     echo "</div>";
@@ -79,7 +115,8 @@
             echo "<p>Denah Panggung</p>";
             echo "</div>";
             echo "</div>";
-            echo "<a href='pembelian.php'><button class='beli-button'>Beli</button></a>";
+            echo "<a href='pembelian.php?id=" . $id_konser . "'><button class='beli-button'>Beli</button></a>";
+            
             echo "</fieldset>";
             
             // Daftar aturan konser
@@ -98,7 +135,7 @@
             echo "<ol>";
             $daftar_lagu = explode(",", htmlspecialchars($row['daftar_lagu']));
             foreach($daftar_lagu as $lagu) {
-                echo "<li>" . htmlspecialchars($lagu) . "</li>";
+                echo "<li>" . $lagu . "</li>";
             }
             echo "</ol>";
             echo "</td>";
@@ -123,3 +160,4 @@
 
 </body>
 </html>
+<script src="menuatas.js"></script>
