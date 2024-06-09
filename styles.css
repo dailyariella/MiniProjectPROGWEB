@@ -106,18 +106,16 @@ footer div{
 main{
   text-align: center;
   margin: 0 auto ;
-  margin-top: 10%;
-  margin-bottom: 10%;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 main h2{
-  margin-bottom: 5%;
+  margin-bottom: 2%;
   text-shadow: 1px 1px gray;
 }
 .tptix{
   color:  #A52A2A;
 }
-
-
 
 .labelkonser {
   display: block;
@@ -139,6 +137,14 @@ main h2{
   font-size:20px;
   padding-left: 5%; 
   font-weight:bold;
+}
+.labelkonser3{
+  display: block;
+  text-align: left;
+  font-size:20px;
+  padding-left: 5%; 
+  font-weight:bold;
+  color: #A52A2A;
 }
 
 .detailkonser{
@@ -172,7 +178,6 @@ main h2{
 .konserdetail{
   flex-basis: calc(33.33% - 20px);
   padding: 10px;
-
 }
 
 .konserdetail img {
@@ -242,13 +247,78 @@ a{
   right: 25px;
 } 
 
+/* punya floating menu */
+
+
+
+
+.floating-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 3;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo {
+  flex: 1; 
+}
+
+#floating-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 100px;
+  align-items: center;
+}
+
+#searchbar2 {
+  display: flex;
+  align-items: center;
+}
+
+#searchvalue2 {
+  padding: 5px;
+  border-radius: 20px;
+  background-color: white;
+  border: 2px solid #A52A2A;
+  outline: none;
+  width: 200px;
+}
+
+#searchbutton2 {
+  padding: 5px 10px;
+  background-color: white;
+  border: #A52A2A 2px solid;
+  border-radius: 20px;
+  color: #A52A2A;
+  cursor: pointer;
+}
+
+#searchbutton2:hover {
+  background-color: #A52A2A;
+  color: white;
+}
 #loginlogout {
-  margin-top: 15px;
-  margin-left :5%; 
+  /* margin-top: 10px; */
+  margin-left :10px; 
   border: solid #A52A2A 2px;
   background-color: #fff;
   color:#A52A2A;
-  padding: 10px 20px;
+  padding: 5px 5px;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s;

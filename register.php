@@ -55,12 +55,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             const phonePattern = /^[a-zA-Z0-9]+$/;
 
             if (password.length < 8) {
-                alert("Password must be at least 8 characters long.");
+                alert("Password harus memiliki minimal 8 karakter.");
                 return false;
             }
 
             if (!phone.match(phonePattern)) {
-                alert("Phone number must be alphanumeric.");
+                alert("Masukkan nomor telepon yang valid.");
                 return false;
             }
 

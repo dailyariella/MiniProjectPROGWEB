@@ -22,20 +22,19 @@
             // Koneksi ke database
             include_once "koneksi.php";
 
-            // Cek apakah ada nilai pencarian
             if (isset($_GET['searchValue'])) {
                 $searchValue = '%' . $koneksi->real_escape_string($_GET['searchValue']) . '%';
-                $sql = "SELECT * FROM konser WHERE judul_Konser LIKE ? OR penyanyi LIKE ? OR daftar_lagu LIKE ? OR harga LIKE ?";
+                $sql = "SELECT * FROM konser WHERE judul_Konser LIKE ? OR penyanyi LIKE ? OR daftar_lagu LIKE ? OR harga LIKE ? OR tanggal_2 LIKE ?";
                 $stmt = $koneksi->prepare($sql);
                 if ($stmt) {
-                    $stmt->bind_param('ssss', $searchValue, $searchValue, $searchValue, $searchValue);
+                    $stmt->bind_param('sssss', $searchValue, $searchValue, $searchValue, $searchValue, $searchValue);
                     $stmt->execute();
                     $result = $stmt->get_result();
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
                             echo "<div class='konserdetail'>";
-                            echo "<img src='" . htmlspecialchars($row['gambar']) . "'><br>";
-                            echo "<label class='labelkonser'>" . htmlspecialchars($row['tanggal']) . " <span>Rp " . htmlspecialchars($row['harga']) . "</span></label>";
+                            echo "<img src='" . htmlspecialchars($row['gambar']) . "' alt='Konser Image'><br>";
+                            echo "<label class='labelkonser'>" . htmlspecialchars($row['tanggal_2']) . " <span>Rp " . htmlspecialchars($row['harga']) . "</span></label>";
                             echo "<label class='labelkonser2'>" . htmlspecialchars($row['judul_Konser']) . " Bersama " . htmlspecialchars($row['penyanyi']) . "</label>";
                             echo "<a href='detailkonser.php?id=" . htmlspecialchars($row['id_Konser']) . "'>"; 
                             echo "<button class='detailkonser'>Read More</button>";
@@ -47,7 +46,7 @@
                     }
                     $stmt->close();
                 } else {
-                    echo "Error preparing statement: " . $koneksi->error;
+                    echo "Error in prepared statement: " . htmlspecialchars($koneksi->error);
                 }
             } else {
                 echo "Tidak ada kata kunci pencarian yang diberikan.";

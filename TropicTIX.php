@@ -3,7 +3,7 @@ session_start();
 include_once "koneksi.php";
 
 if (isset($_SESSION['loggedin']) === true) {
-    $login_logout_link = '<a href="login.php"><button id="loginlogout">Logout</button></a>';
+    $login_logout_link = '<a href="logout.php"><button id="loginlogout">Logout</button></a>';
 } else {
     $login_logout_link = '<a href="login.php"><button id="loginlogout">Login</button></a>';
 }
@@ -17,15 +17,28 @@ if (isset($_SESSION['loggedin']) === true) {
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
+    <div class="floating-menu">
+        <div class="menu-content">
+            <div class="logo">
+                <h1>TropicTIX</h1>
+            </div>
+            <div id="floating-right" class="user_action">
+                <form id="searchbar2" action="searchpage.php" method="GET">
+                    <input type="text" id="searchvalue2" name="searchValue" placeholder="Cari Konser"> 
+                    <button id="searchbutton2" type="submit">Cari</button>
+                </form>
+                <?php echo $login_logout_link ?>
+            </div>
+        </div>
+    </div>
+    <header id="main-header">
         <div class="head_1">
             <h1>TropicTIX</h1>
             <h6>Where the Beat Meets the Beach</h6>
         </div>
-        <?php include 'searchbar.php'; ?>
-        <div class="user_action">
-            <?php echo $login_logout_link; ?>
-    </div>
+        <div id="search-container">
+            <?php include 'searchbar.php'; ?>
+        </div>
     </header>
     <hr>
     <main>
@@ -38,10 +51,11 @@ if (isset($_SESSION['loggedin']) === true) {
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     echo "<div class='konserdetail'>";
-                    echo "<img src='" . $row['gambar'] . "'><br>";
-                    echo "<label class='labelkonser'>" . $row['tanggal'] . " <span>Rp " . $row['harga'] . "</span></label>";
-                    echo "<label class='labelkonser2'>" . $row['judul_Konser']. " Bersama ".$row['penyanyi'] . "</label>";
-                    echo "<a href='detailkonser.php?id=" . $row['id_Konser'] . "'>"; 
+                    echo "<img src='gambar/home/". htmlspecialchars($row['gambar']) . "'><br>";
+                    echo "<label class='labelkonser'>" . htmlspecialchars($row['tanggal_2']) . " <span>Rp " . htmlspecialchars($row['harga']) . "</span></label>";
+                    echo "<label class='labelkonser2'>" . htmlspecialchars($row['judul_Konser']). "</label>";
+                    echo "<label class='labelkonser3'>" . htmlspecialchars($row['penyanyi']) . "</label>";
+                    echo "<a href='detailkonser.php?id=" . htmlspecialchars($row['id_Konser']) . "'>"; 
                     echo "<button class='detailkonser'>Read More</button>";
                     echo "</a>";
                     echo "</div>";
@@ -63,5 +77,7 @@ if (isset($_SESSION['loggedin']) === true) {
             <a href="#"><i class="fab fa-youtube"></i></a>
         </div>
     </footer>
+
+    <script src="menuatas.js"></script>
 </body>
 </html>
