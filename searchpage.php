@@ -34,7 +34,7 @@ if (isset($_SESSION['loggedin']) === true) {
     <div class="floating-menu">
         <div class="menu-content">
             <div class="logo">
-                <h1>TropicTIX</h1>
+            <a href="tropictix.php"><h1>TropicTIX</h1></a>
             </div>
             <div id="floating-right" class="user_action">
                 <form id="searchbar2" action="searchpage.php" method="GET">

@@ -51,6 +51,7 @@ if (isset($_SESSION['loggedin']) === true) {
     <title>TropicTIX</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="Styles.css">
+    <link rel="shortcut icon" type="image/x-icon" href="ttix.png" />
 </head>
 <body>
     <div class="floating-menu">
@@ -70,7 +71,7 @@ if (isset($_SESSION['loggedin']) === true) {
     </div>
     <header id="main-header">
         <div class="head_1">
-            <h1>TropicTIX</h1>
+        <a href="tropictix.php"><h1>TropicTIX</h1></a>
             <h6>Where the Beat Meets the Beach</h6>
         </div>
         <div id="search-container">
@@ -78,6 +79,8 @@ if (isset($_SESSION['loggedin']) === true) {
         </div>
     </header>
     <hr>
+    <?php echo "<a href='Tropictix.php'><button class='btn-kembali'>&lt Kembali</button></a>"; ?>
+
     <main>
     <?php foreach ($pembelian as $item): ?>
         <?php

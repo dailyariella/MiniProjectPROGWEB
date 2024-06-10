@@ -22,12 +22,13 @@ if (isset($_SESSION['loggedin']) === true) {
     <title>TropicTIX</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" type="image/x-icon" href="ttix.png" />
 </head>
 <body>
     <div class="floating-menu">
         <div class="menu-content">
             <div class="logo">
-                <h1>TropicTIX</h1>
+                <a href="tropictix.php"><h1>TropicTIX</h1></a>
             </div>
             <div id="floating-right" class="user_action">
                 <form id="searchbar2" action="searchpage.php" method="GET">
