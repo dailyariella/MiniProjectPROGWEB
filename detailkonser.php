@@ -2,8 +2,14 @@
 session_start();
 include_once "koneksi.php";
 
+if (isset($_GET['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: tropictix.php");
+    exit;
+}
 if (isset($_SESSION['loggedin']) === true) {
-    $login_logout_link = '<a href="logout.php"><button id="loginlogout">Logout</button></a>';
+    $login_logout_link = '<a href="tropictix.php?logout=true"><button id="loginlogout">Logout</button></a>';
 } else {
     $login_logout_link = '<a href="login.php"><button id="loginlogout">Login</button></a>';
 }
@@ -34,6 +40,7 @@ $result = $koneksi->query($sql);
                     <input type="text" id="searchvalue2" name="searchValue" placeholder="Cari Konser"> 
                     <button id="searchbutton2" type="submit">Cari</button>
                 </form>
+                <a href="daftarbelanja.php"><i class="fas fa-shopping-basket"></i></i></a>
                 <?php echo $login_logout_link ?>
             </div>
         </div>
@@ -81,7 +88,7 @@ $result = $koneksi->query($sql);
             echo "<p class='judulkonser'>" . htmlspecialchars($row['judul_Konser']) . "</p>";
             echo "<p class='tglkonser'>" . htmlspecialchars($row['tanggal_2']) . " <span id='wktkonser'>" . htmlspecialchars($row['waktu_mulai']) . "</span></p>";
             echo "<p class='tempatkonser'>" . htmlspecialchars($row['lokasi']) . "</p>";
-            echo "<p class='hargatiket'>Rp " . htmlspecialchars($row['harga']) . "</p>";
+            echo "<p class='penyanyi'>" . htmlspecialchars($row['penyanyi']) . "</p>";
             echo "</div>";
             echo "</td>";
             echo "</tr>";

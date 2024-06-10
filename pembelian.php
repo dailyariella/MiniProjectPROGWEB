@@ -1,17 +1,53 @@
 <?php
-session_start(); // Memulai session
+session_start();
+include_once "koneksi.php";
 
-if (isset($_SESSION['loggedin']) === false) {
+if (isset($_GET['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: tropictix.php");
+    exit;
+}
+
+if (!isset($_SESSION['loggedin'])) {
+    session_unset();
     header("Location: login.php");
     exit;
 }
-if (isset($_SESSION['loggedin']) === true) {
-    $login_logout_link = '<a href="logout.php"><button id="loginlogout">Logout</button></a>';
-} else {
-    $login_logout_link = '<a href="login.php"><button id="loginlogout">Login</button></a>';
-}
 
-include_once "koneksi.php";
+$login_logout_link = isset($_SESSION['loggedin']) ? '<a href="tropictix.php?logout=true"><button id="loginlogout">Logout</button></a>' : '<a href="login.php"><button id="loginlogout">Login</button></a>';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id_user = $_SESSION['username'];
+    $id_tiket = $_POST['id_tiket'];
+    $jumlah = $_POST['jumlah'];
+    $atasnama = $_POST['atasnama'];
+    $nohp = $_POST['nohp'];
+    $emailbeli = $_POST['emailbeli'];
+    $total_harga = $_POST['total_harga'];
+
+    $sql = "SELECT stock FROM tiket WHERE id_tiket = $id_tiket";
+    $result = $koneksi->query($sql);
+    $row = $result->fetch_assoc();
+    $current_stock = $row['stock'];
+
+    if ($current_stock >= $jumlah) {
+        $new_stock = $current_stock - $jumlah;
+        $sql = "UPDATE tiket SET stock = $new_stock WHERE id_tiket = $id_tiket";
+        $koneksi->query($sql);
+
+        $sql = "INSERT INTO pembelian (id_user, id_tiket, jumlah, atasnama, nohp, emailbeli, total_harga) 
+                VALUES ('$id_user', '$id_tiket', '$jumlah', '$atasnama', '$nohp', '$emailbeli', '$total_harga')";
+        if ($koneksi->query($sql) === TRUE) {
+            echo "<script>alert('Pemesanan Berhasil. Kembali ke Home.'); window.location.href = 'TropicTIX.php';</script>";
+        } else {
+            echo "<script>alert('Error: " . $sql . "\\n" . $koneksi->error . "');</script>";        }
+    } else {
+        echo "<script>alert('Stok tidak mencukupi. Kembali.'); window.location.href = 'pembelian.php?id=$id_Konser';</script>";
+    }
+    $koneksi->close();
+    exit;
+}
 
 $id_Konser = $_GET['id'];
 $sql = "SELECT * FROM tiket WHERE id_konser = $id_Konser";
@@ -20,7 +56,6 @@ $result = $koneksi->query($sql);
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,200 +63,202 @@ $result = $koneksi->query($sql);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="StylesheetPembelian.css">
 </head>
-<div class="floating-menu">
-        <div class="menu-content">
-            <div class="logo">
-                <h1>TropicTIX</h1>
-            </div>
-            <div id="floating-right" class="user_action">
-                <form id="searchbar2" action="searchpage.php" method="GET">
-                    <input type="text" id="searchvalue2" name="searchValue" placeholder="Cari Konser"> 
-                    <button id="searchbutton2" type="submit">Cari</button>
-                </form>
-                <?php echo $login_logout_link ?>
-            </div>
-        </div>
-    </div>
-
-
 <body>
-    <header>
-        <div class="head_1">
-            <a href="TropicTIX.php">
-                <h1>TropicTIX</h1>
-            </a>
-            <h6>Where the Beat Meets the Beach</h6>
+<div class="floating-menu">
+    <div class="menu-content">
+        <div class="logo">
+            <h1>TropicTIX</h1>
         </div>
-        <form id="searchbar">
-            <input type="text" id="searchvalue" placeholder="Cari Konser">
-            <button id="searchbutton" type="submit">Cari</button>
-        </form>
-    </header>
-    <div class="bcrumb">
-        <ul class="breadcrumb">
-            <li>
-                <a href="TropicTIX.php">Home</a>
-            </li>
-            <li>
-                <a href="detailkonser.php?id=<?php echo $id_Konser; ?>">
-                    <?php
-                    $sql = "SELECT judul_konser FROM konser WHERE id_konser = $id_Konser";
-                    $result1 = $koneksi->query($sql);
-                    $row = $result1->fetch_assoc();
-                    echo $row['judul_konser'];
-                    ?>
-                </a>
-            </li>
-            <li>
-                <a href="pembelian.php?id=<?php echo $id_Konser; ?>">Pembelian</a>
-            </li>
-        </ul>
-    </div>
-    <hr>
-    <?php
-    echo "<a href='detailkonser.php?id=" . $id_Konser . "'><button class='btn-kembali'>&lt Kembali</button></a>";
-    ?>
-    <main>
-        <p class="pemesanan">Menu Pemesanan</p>
-        <fieldset>
-            <legend>Pilih Tiket Kamu</legend>
-            <div class="ticket">
-                <?php
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<div class='ticket-item' onclick='selectTicket(" . $row['id_tiket'] . ")'>";
-                        echo "<img src='gambar/tiket/" . $row['image_path'] . "' alt=''>";
-                        echo "<div class='ticket-details'>";
-                        echo "<h2>" . $row['jenis_tiket'] . "</h2>";
-                        echo "<p class='stok'>Stok Tersedia: " . $row['stock'] . "</p>";
-                        echo "<p>Rp " . $row['harga'] . "</p>";
-                        echo "<input type='radio' name='ticket' id='" . $row['id_tiket'] . "' value='" . $row['id_tiket'] . "' data-harga='" . $row['harga'] . "'>";
-                        echo "</div>";
-                        echo "</div>";
-                    }
-                } else {
-                    echo "Tidak ada tiket tersedia.";
-                }
-                ?>
-            </div>
-        </fieldset>
-        <fieldset>
-            <form id="formbeli" action="pemesanansukses.html">
-                <table>
-                    <tr>
-                        <td>
-                            <label>Jumlah Tiket :</label>
-                        </td>
-                        <td>
-                            <input type="number" id="jumlahTiket" min="1" max="10" value="1" required disabled><br><br>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Nama:</label>
-                        </td>
-                        <td>
-                            <input type="text" required disabled><br><br>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Nomor Telepon:</label>
-                        </td>
-                        <td>
-                            <input type="tel" pattern="[0-9]{10,12}" required disabled><br><br>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Email:</label>
-                        </td>
-                        <td>
-                            <input type="email" required disabled><br><br>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="reset" value="Batal" disabled>
-                        </td>
-                        <td>
-                            <input type="submit" value="Beli Tiket" disabled>
-                        </td>
-                    </tr>
-                </table>
+        <div id="floating-right" class="user_action">
+            <form id="searchbar2" action="searchpage.php" method="GET">
+                <input type="text" id="searchvalue2" name="searchValue" placeholder="Cari Konser">
+                <button id="searchbutton2" type="submit">Cari</button>
             </form>
-        </fieldset>
-        <fieldset>
-            <legend>Total Harga</legend>
-            <div id="totalHarga">Rp 0</div>
-        </fieldset>
-    </main>
-    <hr>
-    <footer>
-        <p>&copy; 2024 TropicTIX. All rights reserved.</p>
-        <div class="sosmeds">
-            <i class="fab fa-house"></i>
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="daftarbelanja.php"><i class="fas fa-shopping-basket"></i></a>
+            <?php echo $login_logout_link ?>
         </div>
-    </footer>
-
-    <script>
-        function selectTicket(ticketId) {
-            // Mendapatkan elemen radio button yang sesuai
-            var radioButton = document.getElementById(ticketId);
-            radioButton.checked = true;
-
-            // Mendapatkan semua elemen radio button
-            var radioButtons = document.querySelectorAll("input[name='ticket']");
-            var selectedPrice = 0;
-
-            // Menghapus kelas 'selected' dari semua elemen
-            var ticketItems = document.querySelectorAll('.ticket-item');
-            ticketItems.forEach(function(item) {
-                item.classList.remove('selected');
-            });
-
-            // Menambahkan kelas 'selected' ke elemen yang dipilih dan mendapatkan harga tiket yang dipilih
-            radioButtons.forEach(function(radioButton) {
-                if (radioButton.checked) {
-                    selectedPrice = parseInt(radioButton.getAttribute('data-harga'));
-                    radioButton.closest('.ticket-item').classList.add('selected');
+    </div>
+</div>
+<header>
+    <div class="head_1">
+        <a href="TropicTIX.php">
+            <h1>TropicTIX</h1>
+        </a>
+        <h6>Where the Beat Meets the Beach</h6>
+    </div>
+    <form id="searchbar">
+        <input type="text" id="searchvalue" placeholder="Cari Konser">
+        <button id="searchbutton" type="submit">Cari</button>
+    </form>
+</header>
+<div class="bcrumb">
+    <ul class="breadcrumb">
+        <li>
+            <a href="TropicTIX.php">Home</a>
+        </li>
+        <li>
+            <a href="detailkonser.php?id=<?php echo $id_Konser; ?>">
+                <?php
+                $sql = "SELECT judul_konser FROM konser WHERE id_konser = $id_Konser";
+                $result1 = $koneksi->query($sql);
+                $row = $result1->fetch_assoc();
+                echo $row['judul_konser'];
+                ?>
+            </a>
+        </li>
+        <li>
+            <a href="pembelian.php?id=<?php echo $id_Konser; ?>">Pembelian</a>
+        </li>
+    </ul>
+</div>
+<hr>
+<?php echo "<a href='detailkonser.php?id=" . $id_Konser . "'><button class='btn-kembali'>&lt Kembali</button></a>"; ?>
+<main>
+    <p class="pemesanan">Menu Pembelian</p>
+    <fieldset>
+        <legend>Pilih Tiket Kamu</legend>
+        <div class="ticket">
+            <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<div class='ticket-item' onclick='selectTicket(" . $row['id_tiket'] . ")'>";
+                    echo "<img src='gambar/tiket/" . $row['image_path'] . "' alt=''>";
+                    echo "<div class='ticket-details'>";
+                    echo "<h2>" . $row['jenis_tiket'] . "</h2>";
+                    echo "<p class='stok'>Stok Tersedia: " . $row['stock'] . "</p>";
+                    echo "<p>Rp " . $row['harga'] . "</p>";
+                    echo "<input type='radio' name='ticket' id='" . $row['id_tiket'] . "' value='" . $row['id_tiket'] . "' data-harga='" . $row['harga'] . "'>";
+                    echo "</div>";
+                    echo "</div>";
                 }
-            });
+            } else {
+                echo "Tidak ada tiket tersedia.";
+            }
+            ?>
+        </div>
+    </fieldset>
+    <fieldset>
+        <form id="formbeli" action="" method="POST">
+            <input type="hidden" name="id_user" value="<?php echo $_SESSION['username']; ?>">
+            <input type="hidden" name="id_tiket" id="id_tiket">
+            <input type="hidden" name="total_harga" id="total_harga">
+            <table>
+                <tr>
+                    <td><label>Jumlah Tiket :</label></td>
+                    <td><input type="number" id="jumlahTiket" name="jumlah" min="1" max="10" value="1" required><br><br></td>
+                </tr>
+                <tr>
+                    <td><label>Nama:</label></td>
+                    <td><input type="text" id="nama" name="atasnama" required><br><br></td>
+                </tr>
+                <tr>
+                    <td><label>Nomor Telepon:</label></td>
+                    <td><input type="tel" id="nomorTelepon" name="nohp" pattern="[0-9]{10,12}" required><br><br></td>
+                </tr>
+                <tr>
+                    <td><label>Email:</label></td>
+                    <td><input type="email" id="email" name="emailbeli" required><br><br></td>
+                </tr>
+                <tr>
+                    <td><input type="reset" value="Batal"></td>
+                    <td><input type="submit" value="Beli Tiket"></td>
+                </tr>
+            </table>
+        </form>
+    </fieldset>
+    <fieldset>
+        <legend>Total Harga</legend>
+        <div id="totalHarga">Rp 0</div>
+    </fieldset>
+</main>
+<hr>
+<footer>
+    <p>&copy; 2024 TropicTIX. All rights reserved.</p>
+    <div class="sosmeds">
+        <i class="fab fa-house"></i>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+    </div>
+</footer>
 
-            // Mendapatkan jumlah tiket
-            var jumlahTiket = document.getElementById('jumlahTiket').value;
+<script>
+function selectTicket(ticketId) {
+    var radioButton = document.getElementById(ticketId);
+    radioButton.checked = true;
 
-            // Menghitung total harga
-            var totalHarga = selectedPrice * jumlahTiket;
+    var radioButtons = document.querySelectorAll("input[name='ticket']");
+    var selectedPrice = 0;
 
-            // Menampilkan total harga
-            document.getElementById('totalHarga').innerText = 'Rp ' + totalHarga.toLocaleString('id-ID');
+    var ticketItems = document.querySelectorAll('.ticket-item');
+    ticketItems.forEach(function(item) {
+        item.classList.remove('selected');
+    });
 
-            var formInputs = document.querySelectorAll('#formbeli input');
-            formInputs.forEach(function(input) {
-                input.disabled = false;
-            });
+    radioButtons.forEach(function(radioButton) {
+        if (radioButton.checked) {
+            selectedPrice = parseInt(radioButton.getAttribute('data-harga'));
+            radioButton.closest('.ticket-item').classList.add('selected');
+            document.getElementById('id_tiket').value = ticketId;
+            document.getElementById('total_harga').value = selectedPrice * document.getElementById('jumlahTiket').value;
         }
-        document.getElementById('jumlahTiket').addEventListener('input', function() {
-            selectTicket(document.querySelector("input[name='ticket']:checked").id);
-        });
+    });
 
-        var radioButtons = document.querySelectorAll("input[name='ticket']");
-        radioButtons.forEach(function(radioButton) {
-            radioButton.addEventListener('change', function() {
-                selectTicket(radioButton.id);
-            });
-        });
-        var ticketItems = document.querySelectorAll('.ticket-item');
-        ticketItems.forEach(function(item) {
-            item.addEventListener('click', function() {
-                selectTicket(item.querySelector("input[name='ticket']").id);
-            });
-        });
-    </script>
-    <script src="menuatas.js"></script>
+    var jumlahTiket = document.getElementById('jumlahTiket').value;
+    var totalHarga = selectedPrice * jumlahTiket;
+    document.getElementById('totalHarga').innerText = 'Rp ' + totalHarga.toLocaleString('id-ID');
+}
+
+document.getElementById('jumlahTiket').addEventListener('input', function() {
+    selectTicket(document.querySelector("input[name='ticket']:checked").id);
+});
+
+var radioButtons = document.querySelectorAll("input[name='ticket']");
+radioButtons.forEach(function(radioButton) {
+    radioButton.addEventListener('change', function() {
+        selectTicket(radioButton.id);
+    });
+});
+
+var ticketItems = document.querySelectorAll('.ticket-item');
+ticketItems.forEach(function(item) {
+    item.addEventListener('click', function() {
+        selectTicket(item.querySelector("input[name='ticket']").id);
+    });
+});
+
+document.getElementById('formbeli').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    var nama = document.getElementById('nama').value;
+    var nomorTelepon = document.getElementById('nomorTelepon').value;
+    var email = document.getElementById('email').value;
+    var jumlahTiket = document.getElementById('jumlahTiket').value;
+    var selectedTicket = document.querySelector("input[name='ticket']:checked");
+
+    if (!selectedTicket) {
+        alert('Harap pilih tiket terlebih dahulu.');
+        return;
+    }
+
+    var jenisTiket = selectedTicket.closest('.ticket-details').querySelector('h2').innerText;
+    var hargaTiket = parseInt(selectedTicket.getAttribute('data-harga'));
+    var totalHarga = hargaTiket * jumlahTiket;
+    var confirmation = confirm(
+        'Nama: ' + nama + '\n' +
+        'Nomor Telepon: ' + nomorTelepon + '\n' +
+        'Email: ' + email + '\n' +
+        'Jenis Tiket: ' + jenisTiket + '\n' +
+        'Jumlah Tiket: ' + jumlahTiket + '\n' +
+        'Total Harga: Rp ' + totalHarga.toLocaleString('id-ID') + '\n\n' +
+        'Apakah Anda yakin ingin membeli tiket ini?'
+    );
+
+    if (confirmation) {
+        document.getElementById('formbeli').submit();
+    }
+});
+</script>
+<script src="menuatas.js"></script>
 </body>
 </html>

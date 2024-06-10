@@ -357,13 +357,30 @@ input[type="radio"] {
   background-color: #A52A2A;
   color: white;
 }
+.fas {
+  border: #A52A2A 2px solid;
+  padding: 3px 10px;
+  border-radius: 5px;
+  font-size: 30px;
+  color: #A52A2A;
+  margin-left: 10px;
+}
+.fas:hover {
+  background-color: #A52A2A;
+  color: white;
+}
+
+#searchbutton2:hover {
+  background-color: #A52A2A;
+  color: white;
+}
 #loginlogout {
   /* margin-top: 10px; */
   margin-left :10px; 
   border: solid #A52A2A 2px;
   background-color: #fff;
   color:#A52A2A;
-  padding: 5px 5px;
+  padding: 10px 10px;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s;

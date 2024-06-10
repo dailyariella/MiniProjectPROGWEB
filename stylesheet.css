@@ -179,6 +179,12 @@ html {
     font-weight: bolder;
     color: grey;
   }
+
+  .penyanyi{
+    font-size: 30px;
+    color: #A52A2A;
+    font-weight: bold;
+  }
   
   .tglkonser #wktkonser {
     padding-left: 27px;
@@ -193,7 +199,7 @@ html {
   
   .tempatkonser {
     font-size: 20px;
-    color: grey;
+    color: rgb(0, 0, 0);
     font-weight: bold;
   }
   
@@ -365,9 +371,9 @@ color: #fff;
 background-color: #A52A2A;
 transition: 0.6s;
 }
-.btn-kembali img{
+/* .btn-kembali img{
 width: 20px;
-}
+} */
 
 
 
@@ -436,20 +442,31 @@ width: 20px;
   background-color: #A52A2A;
   color: white;
 }
+.fas {
+  border: #A52A2A 2px solid;
+  padding: 3px 10px;
+  border-radius: 5px;
+  font-size: 30px;
+  color: #A52A2A;
+  margin-left: 10px;
+}
+.fas:hover {
+  background-color: #A52A2A;
+  color: white;
+}
+
+#searchbutton2:hover {
+  background-color: #A52A2A;
+  color: white;
+}
 #loginlogout {
   /* margin-top: 10px; */
   margin-left :10px; 
   border: solid #A52A2A 2px;
   background-color: #fff;
   color:#A52A2A;
-  padding: 5px 5px;
+  padding: 10px 10px;
   border-radius: 5px;
   cursor: pointer;
-  transition: 0.2s;
-}
-
-#loginlogout:hover{
-  background-color: #A52A2A;
-  color: #fff;
   transition: 0.2s;
 }
